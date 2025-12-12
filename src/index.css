@@ -1,0 +1,196 @@
+@import "@fontsource/playfair-display/400.css";
+@import "@fontsource/playfair-display/400-italic.css";
+@import "@fontsource/playfair-display/700.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   Base Theme Variables
+========================= */
+
+@layer base {
+  :root {
+    --background: 190 50% 96%;
+    --foreground: 195 55% 25%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 195 55% 25%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 195 55% 25%;
+
+    --primary: 190 55% 32%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 190 30% 94%;
+    --secondary-foreground: 195 55% 25%;
+
+    --muted: 190 20% 92%;
+    --muted-foreground: 195 20% 45%;
+
+    --accent: 150 55% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --border: 190 25% 85%;
+    --input: 190 25% 85%;
+    --ring: 190 55% 32%;
+
+    --radius: 1rem;
+
+    /* Quiz-specific tokens */
+    --quiz-gradient-start: 185 60% 92%;
+    --quiz-gradient-mid: 200 50% 90%;
+    --quiz-gradient-end: 280 40% 92%;
+    --quiz-card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+    --quiz-question-bg: 190 45% 35%;
+    --quiz-title-dark: 195 55% 28%;
+    --quiz-title-light: 195 35% 45%;
+
+    /* Typography */
+    --font-serif: "Playfair Display", Georgia, serif;
+    --font-sans: system-ui, -apple-system, sans-serif;
+  }
+
+  .dark {
+    --background: 195 40% 8%;
+    --foreground: 190 30% 95%;
+
+    --card: 195 35% 12%;
+    --card-foreground: 190 30% 95%;
+
+    --popover: 195 35% 12%;
+    --popover-foreground: 190 30% 95%;
+
+    --primary: 190 50% 50%;
+    --primary-foreground: 195 40% 8%;
+
+    --secondary: 195 30% 18%;
+    --secondary-foreground: 190 30% 95%;
+
+    --muted: 195 30% 18%;
+    --muted-foreground: 190 20% 60%;
+
+    --accent: 150 55% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --border: 195 30% 20%;
+    --input: 195 30% 20%;
+    --ring: 190 50% 50%;
+
+    --quiz-gradient-start: 195 40% 10%;
+    --quiz-gradient-mid: 200 35% 12%;
+    --quiz-gradient-end: 280 30% 14%;
+    --quiz-card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    --quiz-question-bg: 190 40% 30%;
+    --quiz-title-dark: 190 40% 75%;
+    --quiz-title-light: 195 25% 55%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
+
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+}
+
+/* =========================
+   Components
+========================= */
+
+@layer components {
+  .quiz-gradient-bg {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--quiz-gradient-start)) 0%,
+      hsl(var(--quiz-gradient-mid)) 50%,
+      hsl(var(--quiz-gradient-end)) 100%
+    );
+  }
+
+  .quiz-card {
+    @apply bg-card rounded-3xl;
+    box-shadow: var(--quiz-card-shadow);
+  }
+
+  .quiz-title-test,
+  .quiz-title-your {
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+
+  .quiz-title-test {
+    color: hsl(var(--quiz-title-dark));
+  }
+
+  .quiz-title-your {
+    color: hsl(var(--quiz-title-light));
+  }
+
+  .quiz-title-knowledge {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    color: hsl(var(--quiz-title-dark));
+  }
+
+  .quiz-question-pill {
+    background: hsl(var(--quiz-question-bg));
+    @apply text-primary-foreground rounded-full px-6 py-3;
+  }
+
+  .quiz-option {
+    @apply bg-card border border-border rounded-full px-6 py-3 text-center transition-all duration-200;
+  }
+
+  .quiz-option:hover {
+    @apply border-primary/50 shadow-sm;
+  }
+
+  .quiz-option.selected {
+    @apply border-primary bg-primary/5;
+  }
+
+  .quiz-nav-btn {
+    @apply w-10 h-10 rounded-lg border border-border bg-card flex items-center justify-center transition-all duration-200;
+  }
+
+  .quiz-nav-btn:disabled {
+    @apply opacity-40 cursor-not-allowed;
+  }
+
+  .quiz-submit-btn {
+    @apply bg-accent text-accent-foreground px-6 py-2.5 rounded-lg font-medium transition-all duration-200;
+  }
+
+  .quiz-submit-btn:hover {
+    @apply opacity-90 shadow-md;
+  }
+
+  .quiz-progress-bar {
+    @apply h-1 rounded-full transition-all duration-300;
+  }
+
+  .quiz-progress-bar.active {
+    @apply bg-foreground;
+  }
+
+  .quiz-progress-bar.inactive {
+    @apply bg-border;
+  }
+
+  .result-badge {
+    @apply bg-card border border-border rounded-full px-6 py-2 text-sm text-muted-foreground;
+  }
+
+  .start-again-btn {
+    @apply bg-secondary text-secondary-foreground px-8 py-3 rounded-lg font-medium transition-all duration-200;
+  }
+
+  .start-again-btn:hover {
+    @apply bg-secondary/80 shadow-sm;
+  }
+}
